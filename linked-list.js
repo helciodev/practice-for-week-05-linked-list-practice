@@ -1,21 +1,38 @@
 class LinkedListNode {
-  constructor(val) {
+  constructor(val, next) {
     this.value = val;
-    this.next = null;
+    this.next = next;
   }
 }
 
 class LinkedList {
   constructor() {
-    // Your code here
+    this.head = null;
+    this.length = 0;
   }
 
   addToHead(val) {
-    // Your code here
+    this.head = new LinkedListNode(val, this.head);
+    this.length++;
   }
 
   addToTail(val) {
-    // Your code here
+    if (!this.head) {
+      this.head = new LinkedListNode(val, this.head);
+      this.length++;
+      return;
+    }
+
+    let isTrue = true;
+    let current = this.head;
+    while (isTrue) {
+      if (!current.next) {
+        current.next = new LinkedListNode(val, null);
+        this.length++;
+        isTrue = false;
+      }
+      current = current.next;
+    }
   }
 
   // You can use this function to help debug
@@ -30,5 +47,11 @@ class LinkedList {
     console.log("NULL");
   }
 }
+
+const ll = new LinkedList();
+
+ll.addToTail(12);
+ll.addToTail(13);
+ll.print();
 
 module.exports = LinkedList;
